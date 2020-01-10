@@ -16,9 +16,9 @@ function App() {
     padding: 0;
   `;
   const ContentBox = styled.div`
-    position: absolute;
-    top: 50%;
-    background: rgba(255, 255, 255, 0.5);
+    margin: 0 auto;
+    width: 50%;
+    background: rgba(0, 255, 255, 0.5);
   `;
   useEffect(() => {
     axios
