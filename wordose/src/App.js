@@ -1,64 +1,57 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import logo from "./logo.svg";
-import "./App.css";
 import Background from "./components/BackImage";
-import styled from "styled-components";
 import { setState } from "expect/build/jestMatchersObject";
 
 function App() {
   const [data, setData] = useState("");
   const [def, setDef] = useState([]);
   const [example, setExample] = useState([]);
-  const Body = styled.body`
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  `;
-  const ContentBox = styled.div`
-    margin: 0 auto;
-    width: 50%;
-    background: rgba(0, 255, 255, 0.5);
-  `;
   useEffect(() => {
     axios
       .get(
         "http://api.wordnik.com/v4/words.json/wordOfTheDay?api_key=vy6siu06znu24ar2xam4v822l7eziuw2hwu6ho00642spm8zo"
       )
-      .then(response => {
+      .then((response) => {
         console.log(response.data);
         setData(response.data);
         setDef(response.data.definitions);
         setExample(response.data.examples);
       })
-      .catch(error => console.log(error));
+      .catch((error) => console.log(error));
   }, []);
   //using formatdate to improve my life.
   const dateformat = require("dateformat");
   let date = new Date();
   let formatDate = dateformat(date, "fullDate");
   return (
-    <Body>
-      <Background />
-      <ContentBox>
-        <h1>Word: {data.word}</h1>
-        <h2>{formatDate}</h2>
+    <section className="content">
+      <div>
+        <div>
+          <h1>{data.word}</h1>
+          <h2 className="header">{formatDate}</h2>
+        </div>
+
         <ul>
-          Definitions:
-          {def.map(item => {
-            console.log(item.text);
-            return <li>{item.text}</li>;
-          })}
+          <h3>Definitions:</h3>
+          <div>
+            {def.map((item) => {
+              console.log(item.text);
+              return <li>{item.text}</li>;
+            })}
+          </div>
         </ul>
         <ul>
-          Examples:
-          {example.map(item => {
-            console.log(item.text);
-            return <li>{item.text}</li>;
-          })}
+          <h3>Examples:</h3>
+          <div>
+            {example.map((item) => {
+              console.log(item.text);
+              return <li>{item.text}</li>;
+            })}
+          </div>
         </ul>
-      </ContentBox>
-    </Body>
+      </div>
+    </section>
   );
 }
 
