@@ -25,31 +25,33 @@ function App() {
   let date = new Date();
   let formatDate = dateformat(date, "fullDate");
   return (
-    <section className="content">
-      <div>
-        <div>
+    <section className="content card">
+      <div className="card-content">
+        <div className="card-front">
           <h1>{data.word}</h1>
+          <h1>I'm a big flip card</h1>
           <h2 className="header">{formatDate}</h2>
         </div>
-
-        <ul>
-          <h3>Definitions:</h3>
-          <div>
-            {def.map((item) => {
-              console.log(item.text);
-              return <li>{item.text}</li>;
-            })}
-          </div>
-        </ul>
-        <ul>
-          <h3>Examples:</h3>
-          <div>
-            {example.map((item) => {
-              console.log(item.text);
-              return <li>{item.text}</li>;
-            })}
-          </div>
-        </ul>
+        <div className="card-back">
+          <ul>
+            <h3>Definitions:</h3>
+            <div>
+              {def.map((item) => {
+                console.log(item.text);
+                return <li>{item.text}</li>;
+              })}
+            </div>
+          </ul>
+          <ul>
+            <h3>Examples:</h3>
+            <div>
+              {example.map((item) => {
+                console.log(item.text);
+                return <li>{item.text}</li>;
+              })}
+            </div>
+          </ul>
+        </div>
       </div>
     </section>
   );
