@@ -25,14 +25,13 @@ function App() {
   let date = new Date();
   let formatDate = dateformat(date, "fullDate");
   return (
-    <section className="content card">
-      <div className="card-content">
-        <div className="card-front">
+    <div className="container">
+      <section className="card">
+        <div className="card-side card-front">
           <h1>{data.word}</h1>
-          <h1>I'm a big flip card</h1>
           <h2 className="header">{formatDate}</h2>
         </div>
-        <div className="card-back">
+        <div className="card-side card-back">
           <ul>
             <h3>Definitions:</h3>
             <div>
@@ -52,8 +51,8 @@ function App() {
             </div>
           </ul>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }
 
