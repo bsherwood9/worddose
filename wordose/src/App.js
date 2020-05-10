@@ -33,7 +33,7 @@ function App() {
         </div>
         <div className="card-side card-back">
           <ul>
-            <h3>Definitions:</h3>
+            <h3>Definitions</h3>
             <div>
               {def.map((item) => {
                 console.log(item.text);
@@ -57,3 +57,7 @@ function App() {
 }
 
 export default App;
+
+//What to add next? Maybe figure out a better background?
+//Need to add a save feature?
+//how to utilize unsplash api?
