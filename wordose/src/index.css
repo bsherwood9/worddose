@@ -5,25 +5,22 @@
 
 html,
 body {
-  max-height: 100vh;
-  height: 100%;
   box-sizing: border-box;
+  height: 100%;
 }
 body {
   color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: radial-gradient(
+  background: black;
+  /* background: radial-gradient(
     circle,
     rgba(0, 212, 255, 1) 0%,
     rgba(2, 0, 36, 1) 84%
-  );
+  ); */
   font-family: "Amatic SC", cursive;
 }
 
 h1 {
-  font-size: 6rem;
+  font-size: 3rem;
   text-align: center;
 }
 
@@ -33,53 +30,47 @@ h1 {
   right: 2%;
 } */
 
-/* .image-block {
-  width: 800px;
-  height: 800px;
-  position: absolute;
-  z-index: 1;
-} */
-
 ul {
   list-style-type: none;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 ul div {
   padding: 3%;
   font-weight: 400;
 }
-
 ul h3 {
   text-decoration: underline;
   font-weight: 700;
   text-align: left;
   padding-left: 25px;
 }
+li {
+  font-size: 20px;
+}
 .container {
+  margin: 70px auto;
   width: 50rem;
   height: 30rem;
+  position: relative;
 }
 .card {
-  perspective: 1500px;
+  perspective: 3000px;
   position: relative;
-  height: 100%;
 }
 
 .card-side {
-  /* background: rgba(255, 255, 255, 0.5); */
   border-radius: 3%;
-  /* border: 2px solid white; */
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   backface-visibility: hidden;
   text-align: center;
-  transition: all 0.8s ease;
+  transition: transform 0.8s ease;
 }
 .card-side h1 {
-  font-size: 20rem;
+  font-size: 12rem;
   letter-spacing: 40px;
 }
 .header {
@@ -89,15 +80,110 @@ ul h3 {
 
 .card-back {
   transform: rotateY(180deg);
-  background-image: linear-gradient(to bottom right, #ff331f, #ff6152);
 }
-.card-front {
-  height: 100%;
-  /* background-color: lightblue; */
-}
+
 .card:hover .card-front {
   transform: rotateY(-180deg);
 }
 .card:hover .card-back {
   transform: rotateY(0);
+}
+
+/* main */
+main {
+  position: absolute;
+  width: 100%;
+}
+header {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 999;
+  color: white;
+  background: transparent;
+}
+nav {
+  width: 20%;
+
+  position: absolute;
+  text-align: left;
+  top: 100%;
+  left: 0;
+  transform: scale(1, 0);
+  transform-origin: top;
+  transition: transform ease-in 200ms;
+}
+nav ul {
+  margin: 0;
+  padding: 0;
+}
+nav li {
+  margin-left: 1rem;
+}
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 150ms ease-in-out;
+}
+header h1 {
+  font-size: 1rem;
+}
+.toggle {
+  display: none;
+}
+.toggle:checked ~ nav {
+  transform: scale(1, 1);
+}
+.toggle:checked ~ nav a {
+  opacity: 1;
+  transition: opacity 100ms ease-in 150ms;
+}
+.toggle-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-left: 1rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.toggle-label span,
+.toggle-label span::before,
+.toggle-label span::after {
+  display: block;
+  background: white;
+  height: 2px;
+  border-radius: 30px;
+  width: 1.8rem;
+  position: relative;
+}
+
+.toggle-label span::before,
+.toggle-label span::after {
+  content: "";
+  position: absolute;
+}
+.toggle-label span::before {
+  top: 5px;
+}
+.toggle-label span::after {
+  bottom: 5px;
+}
+
+.definitions {
+  margin: 3rem;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.image-box {
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 20px;
 }
