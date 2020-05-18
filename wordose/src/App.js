@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
+import { Route, Switch } from "react-router-dom";
 import axios from "axios";
 import Navbar from "./components/navbar";
 import Image from "../src/assets/401073.jpg";
+import MyFavorites from "./components/FavoritePage";
 
 function App() {
   const [data, setData] = useState("");
   const [def, setDef] = useState([]);
   const [example, setExample] = useState([]);
   const [image, setImage] = useState(Image);
-
-  // const styles = {
-  //   backgroundImage,
-  // };
+  const [saved, setSaved] = useState([]);
+  const bag = { word: "", definitions: [], examples: [] };
   useEffect(() => {
     axios
       .get(
@@ -22,7 +22,6 @@ function App() {
         setData(response.data);
         setDef(response.data.definitions);
         setExample(response.data.examples);
-        console.log("Image", image);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -34,51 +33,76 @@ function App() {
       .then((response) => {
         console.log("This is the response", response);
         setImage(response.data.urls.regular);
-        // setImage(Image);
       });
   }, [image]);
+  useEffect(() => {
+    console.log(saved);
+  }, [saved]);
   //using formatdate to improve my life.
   const dateformat = require("dateformat");
   let date = new Date();
   let formatDate = dateformat(date, "fullDate");
+
+  //
   return (
     <main>
       <Navbar />
-      <div className="container">
-        <section className="card">
-          <div className="card-side card-front">
-            <h1>{data.word}</h1>
-            <h2 className="header">{formatDate}</h2>
-          </div>
-          <div className="card-side card-back">
-            <div
-              className="image-box"
-              style={{ backgroundImage: "url(" + image + ")" }}
-            >
-              <div className="definitions">
-                <ul>
-                  <h3>Definitions:</h3>
-                  <div>
-                    {def.map((item) => {
-                      console.log(item.text);
-                      return <li>{item.text}</li>;
-                    })}
-                  </div>
-                </ul>
-                <ul>
-                  <h3>Examples:</h3>
-                  <div>
-                    {example.map((item) => {
-                      console.log(item.text);
-                      return <li>{item.text}</li>;
-                    })}
-                  </div>
-                </ul>
+      <Switch>
+        <Route exact path="/">
+          <div className="container">
+            <section className="card">
+              <div className="card-side card-front">
+                <h1>{data.word}</h1>
+                <h2 className="header">{formatDate}</h2>
               </div>
-            </div>
+              <div className="card-side card-back">
+                <div
+                  className="image-box"
+                  style={{ backgroundImage: "url(" + image + ")" }}
+                >
+                  <div className="definitions">
+                    <ul>
+                      <h3>Definitions:</h3>
+                      <div>
+                        {def.map((item) => {
+                          console.log(item.text);
+                          return <li>{item.text}</li>;
+                        })}
+                      </div>
+                    </ul>
+                    <ul>
+                      <h3>Examples:</h3>
+                      <div>
+                        {example.map((item) => {
+                          console.log(item.text);
+                          return <li>{item.text}</li>;
+                        })}
+                      </div>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </section>
           </div>
-        </section>
-      </div>
+          <div className="btn-box">
+            <button
+              onClick={() => {
+                bag.word = data.word;
+                bag.definitions = def.map((item) => item.text);
+                bag.examples = example.map((item) => item.text);
+                console.log(bag);
+                setSaved([...saved, bag]);
+              }}
+              className="save"
+            >
+              Save
+            </button>
+          </div>
+        </Route>
+        <Route exact path="/favorites">
+          <MyFavorites saved={saved} />
+        </Route>
+      </Switch>
     </main>
   );
 }

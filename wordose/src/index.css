@@ -71,8 +71,9 @@ li {
 }
 .card-side h1 {
   font-size: 12rem;
-  letter-spacing: 40px;
+  letter-spacing: 20px;
 }
+
 .header {
   font-size: 3rem;
   text-decoration: underline;
@@ -107,7 +108,7 @@ header {
 }
 nav {
   width: 20%;
-
+  background: black;
   position: absolute;
   text-align: left;
   top: 100%;
@@ -125,6 +126,7 @@ nav li {
 }
 nav a {
   color: white;
+
   text-decoration: none;
   font-size: 1.2rem;
   text-transform: uppercase;
@@ -186,4 +188,49 @@ header h1 {
   background-repeat: no-repeat;
   background-size: cover;
   padding: 20px;
+}
+.btn-box {
+  display: flex;
+  justify-content: center;
+}
+.save {
+  font-size: 2rem;
+  background: black;
+  color: white;
+  font-family: "Amatic SC", cursive;
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+  text-align: center;
+}
+.save:hover {
+  background: white;
+  color: black;
+}
+/* My favorites */
+
+.defCard {
+  border: 1px solid white;
+  padding: 1rem;
+  position: relative;
+}
+.defCard button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  background: black;
+  color: white;
+  font-size: 1.5rem;
+  border: none;
+}
+
+.fav-page {
+  margin-top: 50px;
+}
+.fav-grid {
+  padding: 2rem;
+  display: grid;
+  gap: 2rem;
+  padding-top: 3rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  justify-content: center;
 }
