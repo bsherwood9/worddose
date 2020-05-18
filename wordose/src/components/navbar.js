@@ -14,6 +14,9 @@ function Navbar() {
           <li>
             <Link to="/favorites">My Favorites</Link>
           </li>
+          <li>
+            <Link to="/login">Login </Link>
+          </li>
         </ul>
       </nav>
       <label for="toggle" className="toggle-label">
