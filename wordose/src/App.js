@@ -3,7 +3,9 @@ import { Route, Switch } from "react-router-dom";
 import axios from "axios";
 import Navbar from "./components/navbar";
 import Image from "../src/assets/401073.jpg";
-import MyFavorites from "./components/FavoritePage";
+import { MyFavorites } from "./components/FavoritePage";
+import LoginForm from "./components/Login";
+import PRoute from "./protected/PrivateRoute";
 
 function App() {
   const [data, setData] = useState("");
@@ -99,8 +101,12 @@ function App() {
             </button>
           </div>
         </Route>
-        <Route exact path="/favorites">
-          <MyFavorites saved={saved} />
+        <PRoute
+          path="/favorites"
+          component={() => <MyFavorites saved={saved} />}
+        />
+        <Route exact path="/login">
+          <LoginForm />
         </Route>
       </Switch>
     </main>

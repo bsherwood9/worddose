@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import DefCard from "./DefCard";
 
-function MyFavorites({ saved }) {
+export function MyFavorites({ saved }) {
   const [bags, setBags] = useState(saved || null);
   return (
     <div className="fav-page">
@@ -18,5 +18,3 @@ function MyFavorites({ saved }) {
     </div>
   );
 }
-
-export default MyFavorites;

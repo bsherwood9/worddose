@@ -243,3 +243,10 @@ header h1 {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   justify-content: center;
 }
+
+.login_box {
+  width: 100%;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
