@@ -18,3 +18,5 @@ function DefCard({ obj }) {
   );
 }
 export default DefCard;
+
+//need to figure out how to post definitions
