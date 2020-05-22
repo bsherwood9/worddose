@@ -6,6 +6,7 @@ import Image from "../src/assets/401073.jpg";
 import { MyFavorites } from "./components/FavoritePage";
 import LoginForm from "./components/Login";
 import PRoute from "./protected/PrivateRoute";
+import { axiosWithAuth } from "./utils/axiosWithAuth";
 
 function App() {
   const [data, setData] = useState("");
@@ -13,6 +14,7 @@ function App() {
   const [example, setExample] = useState([]);
   const [image, setImage] = useState(Image);
   const [saved, setSaved] = useState([]);
+  const [userId, setUserId] = useState(null);
   const bag = { word: "", definitions: [], examples: [] };
   useEffect(() => {
     axios
@@ -45,7 +47,9 @@ function App() {
   let date = new Date();
   let formatDate = dateformat(date, "fullDate");
 
-  //
+  const saveToDatabase = (bag) => {
+    axiosWithAuth();
+  };
   return (
     <main>
       <Navbar />
@@ -88,12 +92,12 @@ function App() {
           </div>
           <div className="btn-box">
             <button
-              onClick={() => {
+              onClick={async () => {
                 bag.word = data.word;
                 bag.definitions = def.map((item) => item.text);
                 bag.examples = example.map((item) => item.text);
                 console.log(bag);
-                setSaved([...saved, bag]);
+                await setSaved([...saved, bag]);
               }}
               className="save"
             >
@@ -106,7 +110,7 @@ function App() {
           component={() => <MyFavorites saved={saved} />}
         />
         <Route exact path="/login">
-          <LoginForm />
+          <LoginForm setUserId={setUserId} />
         </Route>
       </Switch>
     </main>

@@ -27,12 +27,10 @@ const LoginForm = (props) => {
     axiosWithAuth()
       .post(`/auth/${location}`, creds)
       .then((res) => {
-        console.log(res);
+        console.log("login response", res);
         localStorage.setItem("token", res.data.token);
         setPrevUser(true);
-        // // if (location === "login") {
-        // //   props.history.push("/favorites");
-        // }
+        props.setUserId(res.data.id);
       })
       .catch((err) => {
         localStorage.removeItem("token");
