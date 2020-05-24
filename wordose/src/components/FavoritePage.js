@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from "react";
 import DefCard from "./DefCard";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 export function MyFavorites({ saved }) {
   const [bags, setBags] = useState(saved || null);
+  useEffect(() => {
+    axiosWithAuth()
+      .get("/favs/")
+      .then((res) => console.log("Did we get data", res))
+      .catch((err) => console.log(err));
+  }, []);
   return (
     <div className="fav-page">
       <h1>My Favorites:</h1>

@@ -41,8 +41,30 @@ function App() {
       });
   }, [image]);
   useEffect(() => {
-    console.log(saved);
-  }, [saved]);
+    if (wordNumber) {
+      def.map((item) => {
+        axiosWithAuth()
+          .post(`/favs/def/${wordNumber}`, { text: item.text })
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log("This is the word number.", wordNumber);
+            console.log(err);
+          });
+      });
+      example.map((item) => {
+        axiosWithAuth()
+          .post(`/favs/examp/${wordNumber}`, { text: item.text })
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      });
+    }
+  }, [wordNumber]);
   //using formatdate to improve my life.
   const dateformat = require("dateformat");
   let date = new Date();
@@ -100,16 +122,6 @@ function App() {
                   .then((res) => {
                     console.log(res);
                     setWordNumber(res.data);
-                    def.map((item) => {
-                      axiosWithAuth()
-                        .post(`/favs/def/${wordNumber}`, { text: item.text })
-                        .then((res) => {
-                          console.log(res);
-                        })
-                        .catch((err) => {
-                          console.log(err);
-                        });
-                    });
                   })
                   .catch((err) => {
                     console.log(err);
