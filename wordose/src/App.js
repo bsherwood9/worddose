@@ -14,6 +14,7 @@ function App() {
   const [example, setExample] = useState([]);
   const [image, setImage] = useState(Image);
   const [saved, setSaved] = useState([]);
+  const [wordNumber, setWordNumber] = useState(null);
   const [userId, setUserId] = useState(null);
   const bag = { word: "", definitions: [], examples: [] };
   useEffect(() => {
@@ -48,7 +49,7 @@ function App() {
   let formatDate = dateformat(date, "fullDate");
 
   const saveToDatabase = (bag) => {
-    axiosWithAuth();
+    axiosWithAuth().post();
   };
   return (
     <main>
@@ -93,11 +94,32 @@ function App() {
           <div className="btn-box">
             <button
               onClick={async () => {
-                bag.word = data.word;
-                bag.definitions = def.map((item) => item.text);
-                bag.examples = example.map((item) => item.text);
-                console.log(bag);
-                await setSaved([...saved, bag]);
+                let wordObj = { word: data.word };
+                axiosWithAuth()
+                  .post("/favs/word/", wordObj)
+                  .then((res) => {
+                    console.log(res);
+                    setWordNumber(res.data);
+                    def.map((item) => {
+                      axiosWithAuth()
+                        .post(`/favs/def/${wordNumber}`, { text: item.text })
+                        .then((res) => {
+                          console.log(res);
+                        })
+                        .catch((err) => {
+                          console.log(err);
+                        });
+                    });
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                    console.log(wordObj);
+                  });
+
+                // bag.definitions = def.map((item) => item.text);
+                // bag.examples = example.map((item) => item.text);
+                // console.log(bag);
+                // await setSaved([...saved, bag]);
               }}
               className="save"
             >
