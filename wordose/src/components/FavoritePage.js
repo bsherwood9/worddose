@@ -7,7 +7,10 @@ export function MyFavorites({ saved }) {
   useEffect(() => {
     axiosWithAuth()
       .get("/favs/")
-      .then((res) => console.log("Did we get data", res))
+      .then((res) => {
+        console.log("Did we get data", res);
+        setBags(res.data);
+      })
       .catch((err) => console.log(err));
   }, []);
   return (
