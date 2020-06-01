@@ -13,6 +13,7 @@ export function MyFavorites({ saved }) {
       })
       .catch((err) => console.log(err));
   }, []);
+
   return (
     <div className="fav-page">
       <h1>My Favorites:</h1>
@@ -21,7 +22,7 @@ export function MyFavorites({ saved }) {
       ) : (
         <div className="fav-grid">
           {bags.map((obj) => (
-            <DefCard obj={obj} />
+            <DefCard obj={obj} bags={bags} setBags={setBags} />
           ))}
         </div>
       )}
